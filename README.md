@@ -8,6 +8,12 @@ typings install file:node_modules/angularfire2/node_modules/firebase/firebase.d.
 ```
 what i found was that the typing are in the `AngularFire2` npm module so be sure to install that with your project. If there is a better way please let me know.
 
+**WARNING:** the ones that get installed from npm are incorrect, **do not** do this....
+```
+npm install @types/firebase --save-dev --save-exact
+```
+It will install the incorrect version of the type definitions
+
 ####Set Firebase3 Configuration Properties
 ```Javascript
 const firebaseConfig = {
