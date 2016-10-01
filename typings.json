@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "firebase": "registry:npm/firebase#3.0.5+20160723033700"
+  },
+  "globalDependencies": {
+    "firebase": "file:/Users/aaronksaunders/dev/ionic/ionicRel2Firebase/node_modules/angularfire2/node_modules/firebase/firebase.d.ts"
+  }
+}
