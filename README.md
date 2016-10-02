@@ -16,10 +16,19 @@ It will install the incorrect version of the type definitions
 
 ####Set Firebase3 Configuration Properties
 ```Javascript
+
+import firebase from 'firebase'
+
+// the firebase config
 const firebaseConfig = {
   apiKey: '<your-key>',
   authDomain: '<your-project-authdomain>',
   databaseURL: '<your-database-URL>',
   storageBucket: '<your-storage-bucket>'
 };
+```
+
+####Modify `rollup.config.json` to resolve issues with Firebase
+```Javascript
+  useStrict: false,
 ```
