@@ -5,14 +5,14 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
+import firebase from 'firebase'
 
-
-// Must export the config
+// the firebase config
 const firebaseConfig = {
-  apiKey: '<your-key>',
-  authDomain: '<your-project-authdomain>',
-  databaseURL: '<your-database-URL>',
-  storageBucket: '<your-storage-bucket>'
+  apiKey: "AIzaSyBb0yc3UWwQPy_dvkcRLThNfQZuNx9jZ-g",
+  authDomain: "fir-starterapp.firebaseapp.com",
+  databaseURL: "https://fir-starterapp.firebaseio.com",
+  storageBucket: "fir-starterapp.appspot.com",
 };
 
 @NgModule({
@@ -34,7 +34,7 @@ const firebaseConfig = {
 export class AppModule {
 
   constructor() {
-    console.log()    
+    console.log()
     firebase.initializeApp(firebaseConfig)
   }
 }

@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
+import firebase from 'firebase'
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
 })
 
-export class HomePage {
+export class HomePage  implements OnInit {
 
   currentUser;
   error;
@@ -16,8 +17,7 @@ export class HomePage {
   submitted = false;
   credentials: { email?: string, password?: string } = {};
 
-  constructor(
-    public navCtrl: NavController) {
+  constructor(public navCtrl: NavController) {
 
   }
 
