@@ -13,7 +13,25 @@
       Firebase Login Ionic2 RC0
     </div>
     <div *ngIf="currentUser && authChecked">
-      <pre>{{currentUser | json}}</pre>
+      <pre>{{currentUser.auth?.displayName || currentUser.auth?.email}}</pre>
+      <ion-row responsive-sm>
+        <!-- list of items as cards -->
+        <ion-list>
+          <ion-card *ngFor="let item of assetList | async">
+            <ion-card-header>
+              {{item.name}}
+            </ion-card-header>
+            <ion-card-content>
+              <div class="blockUIParent">
+                <img src="{{item.URL}}" class="blockUIimg" />
+              </div>
+              <div>
+                {{item.owner}} - {{ item.lastUpdated}}
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+      </ion-row>
       <ion-row responsive-sm>
         <ion-col>
           <button ion-button (click)="doLogout()" color="primary" block>Logout</button>

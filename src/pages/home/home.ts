@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, NgZone } from '@angular/core';
+import { Observable } from "rxjs/Observable";
 import { NavController } from 'ionic-angular';
-
 import firebase from 'firebase'
 
 @Component({
@@ -9,21 +8,24 @@ import firebase from 'firebase'
   templateUrl: 'home.html',
 })
 
-export class HomePage  implements OnInit {
+export class HomePage implements OnInit {
 
   currentUser;
   error;
+  authState;
   authChecked = false
   submitted = false;
   credentials: { email?: string, password?: string } = {};
 
-  constructor(public navCtrl: NavController) {
+  assetList
 
+  constructor(
+    public navCtrl: NavController,
+    private ngZone: NgZone) {
   }
 
 
   ngOnInit() {
-
     // subscribe to the auth object to check for the login status
     // of the user, if logged in, save some user information and
     // execute the firebase query...
@@ -32,15 +34,19 @@ export class HomePage  implements OnInit {
 
     firebase.auth().onAuthStateChanged((_currentUser) => {
 
-      if (_currentUser) {
-        console.log("in auth subscribe", _currentUser)
-        this.currentUser = _currentUser;
-        console.log(_currentUser);
-      } else {
-        this.currentUser = null
-      }
+      this.ngZone.run(() => {
+        if (_currentUser) {
+          console.log("in auth subscribe", _currentUser)
+          this.currentUser = _currentUser;
 
-      this.authChecked = true;
+          this.assetList = this.doShowList();
+
+        } else {
+          this.currentUser = null
+        }
+
+        this.authChecked = true;
+      });
 
     })
   }
@@ -69,5 +75,43 @@ export class HomePage  implements OnInit {
         });
     }
   }
+
+  doShowList() {
+
+    console.log("in doShowList");
+    try {
+      return new Observable(observer => {
+
+        var ref = firebase.database().ref('assets')
+
+        ref.orderByKey().once('value', (snapshot) => {
+          var arr = []
+
+          console.log("in doShowList Loop");
+
+          snapshot.forEach((childSnapshot) => {
+            var data = childSnapshot.val()
+            data['id'] = childSnapshot.key
+            arr.push(data);
+
+            console.log(data);
+            return false;
+          });
+          console.log(arr);
+
+          observer.next(arr)
+          observer.complete()
+        },
+          (error) => {
+            console.log("ERROR:", error)
+            observer.error(error)
+          });
+      });
+
+    } catch (EE) {
+      console.log(EE)
+    }
+  }
+
 
 }
