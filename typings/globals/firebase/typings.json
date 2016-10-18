@@ -1,8 +1,0 @@
-{
-  "resolution": "main",
-  "tree": {
-    "src": "/Users/aaronksaunders/dev/ionic/ionicRel2Firebase/node_modules/firebase/firebase.d.ts",
-    "raw": "file:node_modules/firebase/firebase.d.ts",
-    "typings": "/Users/aaronksaunders/dev/ionic/ionicRel2Firebase/node_modules/firebase/firebase.d.ts"
-  }
-}
